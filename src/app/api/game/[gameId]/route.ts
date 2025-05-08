@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { OseroBoard } from '@/lib/game/board';
 import { CPUPlayer } from '@/lib/game/cpu';
 import { GameState, GameMode, Difficulty } from '@/lib/game/types';
@@ -7,7 +7,7 @@ import { GameState, GameMode, Difficulty } from '@/lib/game/types';
 const gameStates = new Map<string, GameState>();
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { gameId: string } }
 ) {
   const gameId = params.gameId;
@@ -21,7 +21,7 @@ export async function GET(
 }
 
 export async function POST(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { gameId: string } }
 ) {
   const gameId = params.gameId;
