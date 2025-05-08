@@ -6,11 +6,17 @@ import { GameState, GameMode, Difficulty } from '@/lib/game/types';
 // メモリ内でゲーム状態を管理（本番環境ではデータベースを使用することを推奨）
 const gameStates = new Map<string, GameState>();
 
+type RouteContext = {
+  params: {
+    gameId: string;
+  };
+};
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { gameId: string } }
+  context: RouteContext
 ) {
-  const gameId = params.gameId;
+  const gameId = context.params.gameId;
   const gameState = gameStates.get(gameId);
 
   if (!gameState) {
@@ -22,9 +28,9 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { gameId: string } }
+  context: RouteContext
 ) {
-  const gameId = params.gameId;
+  const gameId = context.params.gameId;
   const { mode, difficulty, row, col } = await request.json();
 
   let gameState = gameStates.get(gameId);
