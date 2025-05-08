@@ -1,4 +1,4 @@
-import { Board, Cell, Player, Move } from './types';
+import { Board, Player, Move } from './types';
 
 export class OseroBoard {
   private board: Board;
